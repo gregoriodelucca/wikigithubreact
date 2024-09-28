@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import RepositoryList from './components/RepositoryList';
+import RepositoryForm from './components/RepositoryForm';
 
-function App() {
+const App = () => {
+  const [repositories, setRepositories] = useState([]);
+
+  const addRepository = (repo) => {
+    setRepositories([...repositories, { id: Date.now(), ...repo }]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Wiki de Repositórios do GitHub</h1>
+      <RepositoryForm addRepository={addRepository} />
+      <RepositoryList repositories={repositories} />
     </div>
   );
-}
+};
 
 export default App;
